@@ -12,13 +12,11 @@ public class Uri1114 {
             //System.out.print("Digite o " + cont + "º valor: ");
             password = entrada.nextInt();
 
-            if(password == 2002)
-            {
+            if(password != 2002){
+                System.out.println("Senha Invalida");
+            } else {
                 System.out.println("Acesso Permitido");
                 senhaOK = true;                
-                
-            } else {
-                System.out.println("Senha Invalida");
             }
         } 
         entrada.close();

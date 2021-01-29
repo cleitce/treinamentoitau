@@ -12,7 +12,7 @@ public class Uri1064 {
             //System.out.print("Digite o " + cont + "º valor: ");
             valor = entrada.nextDouble();
 
-            if(valor > 0){  //valores positivo
+            if(valor > 0){  //valores positivos
                 qtdePositivos ++;
                 somaPositivos += valor;
             }
