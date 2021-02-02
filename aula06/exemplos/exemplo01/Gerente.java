@@ -5,8 +5,9 @@ public class Gerente extends Funcionario {
     private int nFuncionarios;
 
     //Construtor 1 
-    public Gerente(String nome, double salario){
+    public Gerente(String nome, double salario, int nFuncionarios){
         super(nome, salario);  //chamada ao construtor da superclasse Funcionario
+        this.nFuncionarios = nFuncionarios;
     }
 
     //Construtor 1 - OVERLOAD
@@ -22,4 +23,13 @@ public class Gerente extends Funcionario {
         this.nFuncionarios = qtdeFuncionarios;
     }
 
+    @Override   //anotação indicando a sobreescrita do método de Funcionario para o Gerente
+    public String getDados() {
+        return super.getDados() + ", " + nFuncionarios;
+    }
+
+    @Override
+    public void aumentarSalario(int percentual) {
+        super.aumentarSalario(percentual + 20);
+    }
 }
