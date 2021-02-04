@@ -1,0 +1,15 @@
+
+BOOTSTRAP
+https://getbootstrap.com/docs/4.1/components/card/
+
+MYSQL
+https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-8.0.21.0.msi
+após instalação:
+comando: \quit
+
+GERADOR DE REGISTROS:
+https://generatedata.com/
+Preencha os campos o tipo de saida e execute (maximo 100 registros)
+
+DBDESIGNER
+http://dbdesigner.net/
