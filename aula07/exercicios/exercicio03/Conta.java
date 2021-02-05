@@ -17,15 +17,20 @@ public abstract class Conta {
         return saldo;
     }    
 
-    public void deposito(double valorDeposito){
+    public boolean deposito(double valorDeposito){
         if(valorDeposito > 0){
             saldo = saldo + valorDeposito;
+            return true;            
         }
+        return false;  // valor de deposito precisa ser maior do que zero
     }
 
-    public void saque(double valorSaque){
+    public boolean saque(double valorSaque){
         if(valorSaque > 0){
             saldo = saldo - valorSaque;
+            return true;
         }
+        return false;  //saldo insuficiente
     }
+
 }

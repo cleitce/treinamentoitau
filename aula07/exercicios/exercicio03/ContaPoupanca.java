@@ -8,10 +8,12 @@ public class ContaPoupanca extends Conta{
     }
 
     @Override
-    public void saque(double valorSaque) {
+    public boolean saque(double valorSaque) {
         if(valorSaque < getSaldo() + taxa){
             super.saque(valorSaque + taxa);
+            return true;
         }
+        return false;  //saldo insuficiente
     } 
 
     public static void setTaxa(double novaTaxa){
@@ -23,6 +25,7 @@ public class ContaPoupanca extends Conta{
 
     @Override
     public String toString() {
-        return getNumeroConta() + ":" + getSaldo() + ":" + taxa;
+        //return getNumeroConta() + ":" + getSaldo() + ":" + taxa;
+        return "Conta Poupança:" + getNumeroConta() + " - " + getSaldo() + taxa;
     }
 }

@@ -19,11 +19,17 @@ public class ContaEspecial extends Conta {
     }
 
     @Override
-    public void saque(double valorSaque) {
+    public boolean saque(double valorSaque) {
         if(valorSaque > 0 && valorSaque <= getSaldo() + limite){
             super.saque(valorSaque);
+            return true;
         }
+        return false;  //saldo insuficiente
     }
 
+    @Override
+    public String toString() {
+        return "Conta Especial:" + getNumeroConta() + " - " + getSaldo() + " - " + limite;
+    }
 
 }
