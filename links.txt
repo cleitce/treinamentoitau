@@ -60,15 +60,18 @@ create database aula08;
 use aula08;
 
 CREATE TABLE IF NOT EXISTS Clientes (
-	ID int NOT NULL AUTO_INCREMENT,
-	Nome varchar(150) NOT NULL,
-	CPF char(11) NOT NULL,
-	PRIMARY KEY (ID)
+	id int NOT NULL AUTO_INCREMENT,
+	nome varchar(150) NOT NULL,
+	cpf char(11) NOT NULL,
+	PRIMARY KEY (id)
 );
 
-Insert into Clientes values (null, "Emerson Paduan", "1234567890");
-Insert into Clientes values (null, "Cleiton Silva", "0987654321");
-Insert into Clientes values (null, "Manuel Assis", "0102030405");
+Insert into Clientes values (null, "1234567890", "Emerson Paduan");
+Insert into Clientes values (null, "0987654321", "Cleiton Silva");
+Insert into Clientes values (null, "0102030405", "Manuel Assis");
+Insert into Clientes values (null, "1010101010", "Joaquim Martins");
+Insert into Clientes values (null, "2020202020", "Juliana Moreira");
+Insert into Clientes values (null, "3030303030", "Fernanda Mendes");
 
 
 
