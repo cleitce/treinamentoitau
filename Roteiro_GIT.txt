@@ -1,0 +1,45 @@
+- Instala o Git GUI Windows
+- Cria um diretório
+- Clica com botão direito e opção Git Bash
+- Comando "git init ."
+- Comando "git status"para testar
+- Comando "git config --global user.name cleitce"
+- Comando "git config --global user.email cleitce@gmail.com"
+
+- Abrir o VisualCode e a pasta do Git
+- Criar um arquivo .txt
+- Obs: arquivo nasce como Untracked (não monitorado pelo Git)
+- comando para alterar para Tracked "git add <file>" ou "git add *.txt"
+- comando "git rm --cached <file>"
+- Ctrl+L para fazer scroll  e clear para limpar a tela
+- alterada um arquivo no VSCode
+- comando para mandar para histórico "commit" do arquivo (git commit -m "commit inicial")
+- comando para ver o log do Git "git log"
+- comando para resumir a mensagem de log "git log --oneline"
+ "git log --all --graph --oneline"
+
+- Para forçar o git a não maper arquivos deixando em Untracked (exemplo: libs) devemo criar o arquivo ".gitignore"
+
+- Criar uma Branch nova "git branch <nome da branch>
+- comando para consultar as branches criadas "git branch"
+- comando para mudar da Branch "master"para uma nova: "git switch <nome branch>"
+- comando para apagar uma branch "git branch -d <nome>"
+- comando para merge de branches 
+ Obs.: verificar a branch que está ativa: "git branch"
+"git merge <nome branch1 origem para merge com a branch ativa>"
+
+- comando "git remote add origin https://github.com/cleitce/treinamentoitau.git, exemplo:
+
+- comando para verificar os repositórios remotos:
+"git remote -v"
+
+- comando para mandar a branch master para o repositorio:
+"git push -u origin master"
+
+- comando para copiar um repositorio do GitHub
+git clone https://github.com/cleitce/treinamentoitau.git .
+c
+git clone [repository] [local path]
+
+- comando para puxar os arquivos atualizados do repositorio
+"git pull origin master"
