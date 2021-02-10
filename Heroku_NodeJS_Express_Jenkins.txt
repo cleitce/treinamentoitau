@@ -1,0 +1,122 @@
+https://itau-turma14b.herokuapp.com/
+https://github.com/Didox/itau-turma14b
+
+
+https://expressjs.com/pt-br/starter/generator.html
+
+
+https://heroku.com/
+
+
+
+https://www.jenkins.io/download/
+Download Jenkins 2.263.3 LTS
+
+Na instalação opção, localsystem.
+
+instale na porta 8081
+
+Pare e espere na tela unlock jenkins
+
+
+Build > Tdd > Bdd > Dev > Qa > Prod
+
+dev-valida-cpf-seunome
+qa-valida-cpf-seunome
+prod-valida-cpf-seunome
+
+
+START /B npm start 2>&1
+heroku git:remote -a dev-seuprojeto
+
+
+passo 0 acessar o link
+https://github.com/Didox/aplicacao_com_tdd_bdd_aula_itau.git
+
+
+https://nodejs.org/pt-br/download/
+
+
+
+passo 1 - fork
+
+passo 2 clone ro repo de vcs
+git clone https://github.com/NOME_DE_VCS/aplicacao_com_tdd_bdd_aula_itau
+
+cd aplicacao_com_tdd_bdd_aula_itau
+
+npm install
+----------------------------------------------------------------
+
+Passo 1 fazer o pull request reverso
+Passo 2 
+ir para o vs code
+
+git add .
+git commit -m "minhas ateracoes"
+git pull
+git push
+
+ou
+git checkout .
+git pull
+
+
+passo 3
+npm install
+
+passo 4 - rodar no terminal
+npm start
+
+Passo 5 criar outro terminar no vscode e rodar
+npm run test-comportamento
+----------------------------------------------------------------
+
+
+
+
+git clone URL_DE_VCS
+
+$ git add .
+$ git commit -m "atualizando dados do site"
+$ git push
+
+
+$ git init
+$ git add .
+$ git commit -am "novo deploy com heorku cli"
+$ heroku create turma-14c-itau-php2
+$ git push heroku master
+
+
+https://getbootstrap.com/docs/4.0/examples/
+
+
+::: download heroku cli :::
+https://devcenter.heroku.com/articles/heroku-cli
+
+::: Comandos Node.js :::
+
+https://nodejs.org/pt-br/download/
+
+$ npm install express-generator -g
+
+$ express --view=ejs NOME_APP_DE_VCS
+
+$ cd NOME_APP_DE_VCS
+
+$ npm install
+
+criar um arquivo .gitignore na raiz do projeto
+https://www.toptal.com/developers/gitignore/api/node,vscode,windows,linux,macos
+
+$ npm start
+cc
+
+CTRL + C
+
+$ git init
+$ git add .
+$ git commit -am "Mensagem de deploy"
+$ heroku create O_PROJETO_DE_VCS
+$ git push heroku master

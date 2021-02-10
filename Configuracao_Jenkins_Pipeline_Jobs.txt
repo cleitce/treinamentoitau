@@ -1,0 +1,52 @@
+
+BUILD
+=====
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+git pull --force
+npm install
+
+TDD
+===
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+npm run test
+
+BDD
+===
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+START /B npm start 2>&1
+
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+npm run test-comportamento
+
+
+Cria os projetos no HEROKU
+dev-valida-cpf-cleiton
+qa-valida-cpf-cleiton
+prod-valida-cpf-cleiton
+
+DEV
+===
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+heroku git:remote -a dev-valida-cpf-cleiton
+
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+git push heroku main
+
+Obs.: Para parar o Continuous Deploy da pipeline e deixar e criar uma dependência para uma ação manual na trigger do qa, alterar a Ações de pós-build (build other projects - manual step):
+Downstream Project Names para "qa"
+
+QA
+==
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+heroku git:remote -a qa-valida-cpf-cleiton
+
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+git push heroku main
+
+PROD
+====
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+heroku git:remote -a prod-valida-cpf-cleiton
+
+cd C:\Users\002651149\Desktop\treinamentoitau\nodejs\minhas_qualificacoes
+git push heroku main

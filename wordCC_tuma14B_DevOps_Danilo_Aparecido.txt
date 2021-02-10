@@ -1,0 +1,338 @@
+dev-valida-cpf-NOME_DE_VCS
+
+qa-valida-cpf-NOME_DE_VCS
+
+prod-valida-cpf-NOME_DE_VCS
+
+
+heroku git:remote -a dev-seuprojeto
+
+
+
+START /B npm start 2>&1
+
+
+Build > Tdd > Bdd > Dev > Qa > Prod
+
+"test-comportamento": "npx cypress run -b chrome"
+
+
+
+https://devcenter.heroku.com/articles/heroku-cli
+
+
+
+views/index.ejs
+
+---------------------------------------------
+<form action="/">
+      <label for="nome">Digite o seu nome:</label><br>
+      <input type="text" id="nome" name="nome" value="<%= nome %>"><br>
+      <label for="cpf">Digite o seu CPF:</label><br>
+      <input type="text" id="cpf" name="cpf" value="<%= cpf %>"><br><br>
+      <input type="submit" value="Validar">
+
+      <% if (cpfValidado){ %>
+        <div class="sucesso">
+          CPF validado com sucesso
+        </div>
+      <% }else{ %>
+        <div class="erro">
+          CPF Não é válido
+        </div>
+      <% } %>
+    </form>
+---------------------------------------------
+
+
+routes/index.js
+---------------------------------------------
+var express = require('express');
+var router = express.Router();
+const Cliente = require("../models/cliente")
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+
+  var cliente = new Cliente(req.query.nome, req.query.cpf)
+  var cpfValidado = cliente.validarCPF()
+  res.render('index', { cpfValidado: cpfValidado,  cpf: req.query.cpf,  nome: req.query.nome});
+});
+
+module.exports = router;
+
+---------------------------------------------
+
+
+cypress/integration/cliente.spec.js
+---------------------------------------------
+/// <reference types="cypress" />
+
+context('Validar cpf', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/')
+  })
+
+  it('Digitando cpf válido', () => {
+    cy.get('#nome').type('Danilo')
+    // cy.wait(1000)
+    cy.get('#cpf').type('489.333.610-06')
+    // cy.wait(1000)
+    cy.get('input[type="submit"]').click()
+    // cy.wait(1000)
+    cy.get('.sucesso').should("to.have.length", 1)
+    // cy.wait(1000)
+  })
+
+  it('Digitando cpf inválido', () => {
+    // cy.wait(1000)
+    cy.get('#nome').type('Danilo')
+    // cy.wait(1000)
+    cy.get('#cpf').type('489.333.111-06')
+    // cy.wait(1000)
+    cy.get('input[type="submit"]').click()
+    // cy.wait(1000)
+    cy.get('.erro').should("to.have.length", 1)
+    // cy.wait(1000)
+  })
+})
+
+
+
+
+--------------------------------------------------------------
+
+npm install --save-dev cypress
+
+npx cypress open
+
+
+class Cliente{
+  constructor(nome, cpf){
+    this.nome = nome
+    this.cpf = cpf
+  }
+
+  validarCPF(){
+    var soma;
+    var resto;
+    soma = 0;
+
+    this.cpf = this.cpf.replace(/(\.)|(\-)/g, "");
+
+    if (this.cpf.length > 11) return false;
+    if (this.cpf.length < 11) return false;
+    if (this.cpf == "00000000000") return false;
+    if (this.cpf == "11111111111") return false;
+    if (this.cpf == "22222222222") return false;
+    if (this.cpf == "33333333333") return false;
+    if (this.cpf == "44444444444") return false;
+    if (this.cpf == "55555555555") return false;
+    if (this.cpf == "66666666666") return false;
+    if (this.cpf == "77777777777") return false;
+    if (this.cpf == "88888888888") return false;
+    if (this.cpf == "99999999999") return false;
+
+    for (var i=1; i<=9; i++) soma = soma + parseInt(this.cpf.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(this.cpf.substring(9, 10)) ) return false;
+
+    soma = 0;
+    for (var i = 1; i <= 10; i++) soma = soma + parseInt(this.cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+
+    if ((resto == 10) || (resto == 11))  resto = 0;
+    if (resto != parseInt(this.cpf.substring(10, 11) ) ) return false;
+  
+    return true;
+  }
+}
+
+module.exports = Cliente
+------------------------------------------
+
+const Cliente = require("../models/cliente")
+
+test('Ao digitar um CPF válido para um cliente, o mesmo precisa retornar verdadeiro', () => {
+  var cliente = new Cliente("Danilo", "384.960.460-87")
+  expect(cliente.validarCPF()).toBe(true);
+});
+
+test('Ao digitar um CPF válido sem pontos para um cliente, o mesmo precisa retornar verdadeiro', () => {
+  var cliente = new Cliente("Danilo", "38496046087")
+  expect(cliente.validarCPF()).toBe(true);
+});
+
+test('Ao digitar um CPF inválido sem pontos para um cliente, o mesmo precisa retornar falso', () => {
+  var cliente = new Cliente("Danilo", "38496046047")
+  expect(cliente.validarCPF()).toBe(false);
+});
+
+test('Ao digitar um CPF 00000000000, o mesmo precisa retornar falso', () => {
+  var cliente = new Cliente("Danilo", "00000000000")
+  expect(cliente.validarCPF()).toBe(false);
+});
+
+test('Ao digitar um CPF 000000000000, o mesmo precisa retornar falso', () => {
+  var cliente = new Cliente("Danilo", "000000000000")
+  expect(cliente.validarCPF()).toBe(false);
+});
+
+test('Ao digitar um CPF 11111111111, o mesmo precisa retornar falso', () => {
+  var cliente = new Cliente("Danilo", "11111111111")
+  expect(cliente.validarCPF()).toBe(false);
+});
+ 
+------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+<form action="/">
+      <label for="nome">Digite o seu nome:</label><br>
+      <input type="text" id="nome" name="nome"><br>
+      <label for="cpf">Digite o seu CPF:</label><br>
+      <input type="text" id="cpf" name="cpf"><br><br>
+      <input type="submit" value="Validar">
+    </form>
+
+
+
+
+test('A soma de 1 + 2 precisa dar 3', () => {
+  expect(1 + 2).toBe(3);
+});
+
+
+
+https://itau-turma14b.herokuapp.com/
+https://github.com/Didox/itau-turma14b
+
+
+https://expressjs.com/pt-br/starter/generator.html
+
+
+https://heroku.com/
+
+
+
+https://www.jenkins.io/download/
+Download Jenkins 2.263.3 LTS
+
+Na instalação opção, localsystem.
+
+instale na porta 8081
+
+Pare e espere na tela unlock jenkins
+
+
+Build > Tdd > Bdd > Dev > Qa > Prod
+
+dev-valida-cpf-seunome
+qa-valida-cpf-seunome
+prod-valida-cpf-seunome
+
+
+START /B npm start 2>&1
+heroku git:remote -a dev-seuprojeto
+
+
+passo 0 acessar o link
+https://github.com/Didox/aplicacao_com_tdd_bdd_aula_itau.git
+
+
+https://nodejs.org/pt-br/download/
+
+
+
+passo 1 - fork
+
+passo 2 clone ro repo de vcs
+git clone https://github.com/NOME_DE_VCS/aplicacao_com_tdd_bdd_aula_itau
+
+cd aplicacao_com_tdd_bdd_aula_itau
+
+npm install
+----------------------------------------------------------------
+
+Passo 1 fazer o pull request reverso
+Passo 2 
+ir para o vs code
+
+git add .
+git commit -m "minhas ateracoes"
+git pull
+git push
+
+ou
+git checkout .
+git pull
+
+
+passo 3
+npm install
+
+passo 4 - rodar no terminal
+npm start
+
+Passo 5 criar outro terminar no vscode e rodar
+npm run test-comportamento
+----------------------------------------------------------------
+
+
+
+
+git clone URL_DE_VCS
+
+$ git add .
+$ git commit -m "atualizando dados do site"
+$ git push
+
+
+$ git init
+$ git add .
+$ git commit -am "novo deploy com heorku cli"
+$ heroku create turma-14c-itau-php2
+$ git push heroku master
+
+
+https://getbootstrap.com/docs/4.0/examples/
+
+
+::: download heroku cli :::
+https://devcenter.heroku.com/articles/heroku-cli
+
+::: Comandos Node.js :::
+
+https://nodejs.org/pt-br/download/
+
+$ npm install express-generator -g
+
+$ express --view=ejs NOME_APP_DE_VCS
+
+$ cd NOME_APP_DE_VCS
+
+$ npm install
+
+criar um arquivo .gitignore na raiz do projeto
+https://www.toptal.com/developers/gitignore/api/node,vscode,windows,linux,macos
+
+$ npm start
+cc
+
+CTRL + C
+
+$ git init
+$ git add .
+$ git commit -am "Mensagem de deploy"
+$ heroku create O_PROJETO_DE_VCS
+$ git push heroku master
